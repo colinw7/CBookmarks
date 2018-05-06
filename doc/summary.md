@@ -12,6 +12,12 @@ Dump or merge bookmarks HTML files
 # CBookmarksLib #
 Read bookmarks HTML file into internal structure
 
+# CTclBookmarks #
+Old Tcl version of CQBookmarks
+
+# CTclMergeBookmarks #
+Merge two sets of bookmarks files
+
 # CQBookmarks #
 Qt interface to view bookmarks
 
