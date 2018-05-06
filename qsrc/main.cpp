@@ -1,13 +1,22 @@
 #include <CQBookmarks.h>
-#include <QApplication>
 #include <QMainWindow>
 #include <CFile.h>
 #include <iostream>
 
+#ifdef CQ_APP_H
+#include <CQApp.h>
+#else
+#include <QApplication>
+#endif
+
 int
 main(int argc, char **argv)
 {
+#ifdef CQ_APP_H
+  CQApp app(argc, argv);
+#else
   QApplication app(argc, argv);
+#endif
 
   QMainWindow *mw = new QMainWindow;
 
