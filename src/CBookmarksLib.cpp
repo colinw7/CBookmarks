@@ -73,7 +73,7 @@ read()
       if      (id == CHtmlTagId::A) {
         if (tag->isStartTag()) {
           cacheData_.linkValue    = "";
-          cacheData_.lastModified = (time_t) 0;
+          cacheData_.lastModified = static_cast<time_t>(0);
 
           for (const auto &option : tag->getOptions()) {
             std::string optName = CStrUtil::toLower(option->getName());
@@ -86,7 +86,7 @@ read()
             else if (optName == "last_modified") {
               int ti = std::stoi(option->getValue());
 
-              cacheData_.lastModified = (time_t) ti;
+              cacheData_.lastModified = static_cast<time_t>(ti);
             }
           }
         }
@@ -106,7 +106,7 @@ read()
               if (! isIgnoreDuplicates()) {
                 std::cerr << "Duplicate Bookmark for " <<
                              currentGroup->getPath() << "/" << linkValue << " - ";
-                std::cerr << "already in " << bookmark->getGroup()->getPath() << std::endl;
+                std::cerr << "already in " << bookmark->getGroup()->getPath() << "\n";
               }
             }
 
@@ -127,7 +127,7 @@ read()
             if (optName == "last_modified") {
               int ti = std::stoi(option->getValue());
 
-              lastModified_ = std::max(lastModified_, (time_t) ti);
+              lastModified_ = std::max(lastModified_, static_cast<time_t>(ti));
             }
           }
         }
@@ -142,7 +142,7 @@ read()
             if (optName == "last_modified") {
               int ti = std::stoi(option->getValue());
 
-              lastModified_ = std::max(lastModified_, (time_t) ti);
+              lastModified_ = std::max(lastModified_, static_cast<time_t>(ti));
             }
           }
         }
@@ -380,8 +380,8 @@ printHtml(std::ostream &os) const
   uint depth = getDepth();
 
   if (depth > 0) {
-    std::cout << "<h" << depth + 1 << ">" << name_ << "</h" << depth + 1 << ">" << std::endl;
-    std::cout << "<ul>" << std::endl;
+    std::cout << "<h" << depth + 1 << ">" << name_ << "</h" << depth + 1 << ">\n";
+    std::cout << "<ul>\n";
   }
 
   for (const auto &group : groups_)
@@ -397,14 +397,14 @@ printHtml(std::ostream &os) const
       bookmark->printHtml(os);
     else {
       if (! parentFile->isIgnoreDuplicates())
-        std::cerr << "Duplicate url " << last_url << std::endl;
+        std::cerr << "Duplicate url " << last_url << "\n";
     }
 
     last_url = url;
   }
 
   if (depth > 0) {
-    std::cout << "</ul>" << std::endl;
+    std::cout << "</ul>\n";
   }
 }
 
@@ -422,7 +422,7 @@ printMarkdown(std::ostream &os) const
     for (uint i = 0; i < depth; ++i)
       hashStr += "#";
 
-    std::cout << hashStr << " " << name_ << " " << hashStr << std::endl;
+    std::cout << hashStr << " " << name_ << " " << hashStr << "\n";
   }
 
   for (const auto &group : groups_)
@@ -438,7 +438,7 @@ printMarkdown(std::ostream &os) const
       bookmark->printMarkdown(os);
     else {
       if (! parentFile->isIgnoreDuplicates())
-        std::cerr << "Duplicate url " << last_url << std::endl;
+        std::cerr << "Duplicate url " << last_url << "\n";
     }
 
     last_url = url;
@@ -487,14 +487,14 @@ void
 CBookmark::
 printHtml(std::ostream &os) const
 {
-  os << "<li><a href=\"" << url_ << "\">" << name_ << "</a></li>" << std::endl;
+  os << "<li><a href=\"" << url_ << "\">" << name_ << "</a></li>\n";
 }
 
 void
 CBookmark::
 printMarkdown(std::ostream &os) const
 {
-  os << " + [" << name_ << "](" << url_ << ")" << std::endl;
+  os << " + [" << name_ << "](" << url_ << ")\n";
 }
 
 void
@@ -508,7 +508,15 @@ dump(std::ostream &os) const
 
   std::string path = group_->getPath();
 
-  os << "\"" << url << "\" \"" << path << "\"" << std::endl;
+  os << "\"" << url << "\"";
+
+  if (path != "")
+    os << " \"" << path << "\"";
+
+  if (name_ != "")
+    os << " \"" << name_ << "\"";
+
+  os << "\n";
 }
 
 //------------------

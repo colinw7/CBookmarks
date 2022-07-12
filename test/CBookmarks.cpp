@@ -64,7 +64,7 @@ main(int argc, char **argv)
       continue;
     }
 
-    CBookmarkFile *file = new CBookmarkFile(filename);
+    auto *file = new CBookmarkFile(filename);
 
     file->setIgnoreDuplicates(! duplicates);
 
@@ -79,9 +79,9 @@ main(int argc, char **argv)
     char str[256];
 
     for (const auto &file : files) {
-      time_t t = file->lastModified();
+      auto t = file->lastModified();
 
-      struct tm *tm = localtime(&t);
+      auto *tm = localtime(&t);
 
       strftime(str, 256, "%c", tm);
 
