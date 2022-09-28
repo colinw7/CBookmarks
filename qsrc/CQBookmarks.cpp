@@ -14,7 +14,6 @@
 #include <QPainter>
 #include <QPaintEvent>
 #include <QMouseEvent>
-#include <QWheelEvent>
 #include <QTimer>
 
 //--------------

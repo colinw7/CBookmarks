@@ -6,7 +6,6 @@
 
 class QPaintEvent;
 class QMouseEvent;
-class QWheelEvent;
 class QSplitter;
 class QLineEdit;
 class QLabel;
