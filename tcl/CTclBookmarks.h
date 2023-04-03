@@ -9,7 +9,7 @@ class CTclBookmarks : public CTclApp {
   void addItem(const std::string &path, CBookmark *bookmark);
 
  protected:
-  void addCommands();
+  void addCommands() override;
 
-  std::string getTclStr();
+  std::string getTclStr() override;
 };

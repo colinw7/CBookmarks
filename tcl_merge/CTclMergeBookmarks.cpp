@@ -19,7 +19,7 @@ class N : public CTclAppCommand { \
   } \
 \
  protected: \
-  bool proc(int argc, const char **argv); \
+  bool proc(int argc, const char **argv) override; \
 };
 
 CTclMergeBookmarksAppCommand(CTclMergeBookmarksAddItems1)

@@ -16,9 +16,9 @@ class CTclMergeBookmarks : public CTclApp {
   void setFile2(CBookmarkFile *file2) { file2_ = file2; }
 
  protected:
-  void addCommands();
+  void addCommands() override;
 
-  std::string getTclStr();
+  std::string getTclStr() override;
 
  private:
   typedef std::map<CBookmarkGroup *, std::string> GroupPath;
